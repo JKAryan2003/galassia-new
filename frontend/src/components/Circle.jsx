@@ -5,10 +5,10 @@ export default function Circle() {
   const [hovered, setHovered] = useState(null);
 
   const sections = [
-    { id: 'products', label: 'Products', icon: Package, position: 'top-8 left-1/2 -translate-x-1/2' },
-    { id: 'gallery', label: 'Gallery', icon: Image, position: 'right-8 top-1/2 -translate-y-1/2' },
-    { id: 'downloads', label: 'Downloads', icon: Download, position: 'bottom-8 left-1/2 -translate-x-1/2' },
-    { id: 'news', label: 'News', icon: Newspaper, position: 'left-8 top-1/2 -translate-y-1/2' }
+    { id: 'products', label: 'Fashion and Lifestyle', icon: Package, position: 'top-8 left-1/2 -translate-x-1/2' },
+    { id: 'gallery', label: 'Film Making', icon: Image, position: 'right-8 top-1/2 -translate-y-1/2' },
+    { id: 'downloads', label: 'Streaming Platform', icon: Download, position: 'bottom-8 left-1/2 -translate-x-1/2' },
+    { id: 'news', label: 'Educational Content', icon: Newspaper, position: 'left-8 top-1/2 -translate-y-1/2' }
   ];
 
   return (
