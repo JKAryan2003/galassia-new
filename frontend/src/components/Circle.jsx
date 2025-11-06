@@ -1,47 +1,97 @@
-import React from "react";
+import React, { useState } from 'react';
+import { Package, Newspaper, Download, Image } from 'lucide-react';
 
-const Circle = () => {
+export default function Circle() {
+  const [hovered, setHovered] = useState(null);
+
+  const sections = [
+    { id: 'products', label: 'Products', icon: Package, position: 'top-8 left-1/2 -translate-x-1/2' },
+    { id: 'gallery', label: 'Gallery', icon: Image, position: 'right-8 top-1/2 -translate-y-1/2' },
+    { id: 'downloads', label: 'Downloads', icon: Download, position: 'bottom-8 left-1/2 -translate-x-1/2' },
+    { id: 'news', label: 'News', icon: Newspaper, position: 'left-8 top-1/2 -translate-y-1/2' }
+  ];
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      {/* Outer Circle */}
-      <div className="relative w-80 h-80 rounded-full bg-transparent">
-        {/* Top Left */}
-        <div className="absolute w-1/2 h-1/2 bg-blue-400 rounded-tl-full transform -translate-x-[10%] -translate-y-[10%] rotate-[-5deg] flex items-center justify-center">
-          <span className="text-white font-semibold text-center px-2">
-            Top Left
-          </span>
+    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center p-4">
+      <div className="relative w-96 h-96">
+        
+        {/* Outer Circle */}
+        <div className="absolute inset-0 rounded-full bg-slate-600 shadow-2xl overflow-hidden">
+          
+          {/* Top Quadrant */}
+          <div 
+            className="absolute inset-0 origin-center transition-all duration-500 ease-out"
+            style={{
+              clipPath: 'polygon(50% 50%, 0% 0%, 100% 0%)',
+              backgroundColor: hovered === 'products' ? 'rgba(139, 92, 246, 0.5)' : 'transparent',
+              transform: hovered === 'products' ? 'scale(1.05)' : 'scale(1)'
+            }}
+            onMouseEnter={() => setHovered('products')}
+            onMouseLeave={() => setHovered(null)}
+          />
+          
+          {/* Right Quadrant */}
+          <div 
+            className="absolute inset-0 origin-center transition-all duration-500 ease-out"
+            style={{
+              clipPath: 'polygon(50% 50%, 100% 0%, 100% 100%)',
+              backgroundColor: hovered === 'gallery' ? 'rgba(34, 211, 238, 0.5)' : 'transparent',
+              transform: hovered === 'gallery' ? 'scale(1.05)' : 'scale(1)'
+            }}
+            onMouseEnter={() => setHovered('gallery')}
+            onMouseLeave={() => setHovered(null)}
+          />
+          
+          {/* Bottom Quadrant */}
+          <div 
+            className="absolute inset-0 origin-center transition-all duration-500 ease-out"
+            style={{
+              clipPath: 'polygon(50% 50%, 100% 100%, 0% 100%)',
+              backgroundColor: hovered === 'downloads' ? 'rgba(16, 185, 129, 0.5)' : 'transparent',
+              transform: hovered === 'downloads' ? 'scale(1.05)' : 'scale(1)'
+            }}
+            onMouseEnter={() => setHovered('downloads')}
+            onMouseLeave={() => setHovered(null)}
+          />
+          
+          {/* Left Quadrant */}
+          <div 
+            className="absolute inset-0 origin-center transition-all duration-500 ease-out"
+            style={{
+              clipPath: 'polygon(50% 50%, 0% 100%, 0% 0%)',
+              backgroundColor: hovered === 'news' ? 'rgba(249, 115, 22, 0.5)' : 'transparent',
+              transform: hovered === 'news' ? 'scale(1.05)' : 'scale(1)'
+            }}
+            onMouseEnter={() => setHovered('news')}
+            onMouseLeave={() => setHovered(null)}
+          />
+
+          {/* Divider Lines */}
+          <div className="absolute top-0 left-1/2 w-px h-full bg-white opacity-20" />
+          <div className="absolute top-1/2 left-0 w-full h-px bg-white opacity-20" />
+
+          {/* Section Labels */}
+          {sections.map((section) => {
+            const Icon = section.icon;
+            return (
+              <div
+                key={section.id}
+                className={`absolute ${section.position} flex flex-col items-center gap-2 transition-all duration-300 pointer-events-none ${
+                  hovered === section.id ? 'scale-110' : 'scale-100'
+                }`}
+              >
+                <Icon className="w-6 h-6 text-white" />
+                <span className="text-sm text-white font-medium">{section.label}</span>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Top Right */}
-        <div className="absolute right-0 w-1/2 h-1/2 bg-green-400 rounded-tr-full transform translate-x-[10%] -translate-y-[10%] rotate-[5deg] flex items-center justify-center">
-          <span className="text-white font-semibold text-center px-2">
-            Top Right
-          </span>
-        </div>
-
-        {/* Bottom Left */}
-        <div className="absolute bottom-0 w-1/2 h-1/2 bg-yellow-400 rounded-bl-full transform -translate-x-[10%] translate-y-[10%] rotate-[5deg] flex items-center justify-center">
-          <span className="text-white font-semibold text-center px-2">
-            Bottom Left
-          </span>
-        </div>
-
-        {/* Bottom Right */}
-        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-red-400 rounded-br-full transform translate-x-[10%] translate-y-[10%] rotate-[-5deg] flex items-center justify-center">
-          <span className="text-white font-semibold text-center px-2">
-            Bottom Right
-          </span>
-        </div>
-
-        {/* Center Small Circle */}
-        <div className="absolute inset-0 flex justify-center items-center">
-          <div className="w-20 h-20 bg-white border-4 border-gray-300 rounded-full shadow-lg flex justify-center items-center">
-            <span className="text-gray-700 font-bold">Center</span>
-          </div>
+        {/* Center Circle */}
+        <div className="absolute top-1/2 left-1/2 w-24 h-24 -translate-x-1/2 -translate-y-1/2">
+          <div className="w-full h-full rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 shadow-lg" />
         </div>
       </div>
-    </div>         
+    </div>
   );
-};
-
-export default Circle;
+}
